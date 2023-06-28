@@ -12,7 +12,7 @@ public class IndexController implements Controller{
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("index controller");
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = new ModelAndView("root.index");
 		mv.addObject("data","Hello Spring MVC~"); // 모델 만듦
 		//mv.setViewName("index");  // 해당 뷰로 전송
 		return mv; 

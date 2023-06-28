@@ -10,10 +10,29 @@
 	<!-- id에는 url을, class에는 Controller 경로를 입력해서 빈 객체를 등록시킨다. -->
     <bean name="/index" class="com.newlecture.web.controller.IndexController"/>
     
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    	<property name="prefix" value="WEB-INF/view/"></property>
-    	<property name="suffix" value=".jsp"></property>
+    <bean name="/notice/list" class="com.newlecture.web.controller.notice.ListController"/>
+    
+    <bean name="/notice/detail" class="com.newlecture.web.controller.notice.DetailController"/>
+    
+    <!-- Resolver끼리의 충돌을 방지하기 위해 순서 설정 order를 넣음 -->
+    <bean
+    	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    	<property name="viewClass"
+  			value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+  		<property name="order" value="1"/>
     </bean>
+    
+    <bean
+	    class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	    <property name="definitions" value="/WEB-INF/tiles.xml" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="prefix" value="/WEB-INF/view/"></property>
+	    <property name="suffix" value=".jsp"></property>
+	    <property name="order" value="2"/>
+	</bean>
+    
     
     <!-- **는 하위 폴더를 포함한 그 폴더의 모든 하위 폴더/파일 포함 -->
     <!-- /static/ 주소를 /로 매핑시킴 -->
