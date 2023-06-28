@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- id에는 url을, class에는 Controller 경로를 입력해서 빈 객체를 등록시킨다. -->
+    <bean name="/index" class="com.newlecture.web.controller.IndexController"/>
+    
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix" value="WEB-INF/view/"></property>
+    	<property name="suffix" value=".jsp"></property>
+    </bean>
+    
+    <!-- **는 하위 폴더를 포함한 그 폴더의 모든 하위 폴더/파일 포함 -->
+    <!-- /static/ 주소를 /로 매핑시킴 -->
+    <!-- mvc:resources는 정적 파일 받아오면 실행하는것임(css의 이미지등) -->
+    <mvc:resources location="/static/" mapping="/**"></mvc:resources>
+    
+
+</beans>
