@@ -10,7 +10,11 @@
 	<!-- id에는 url을, class에는 Controller 경로를 입력해서 빈 객체를 등록시킨다. -->
     <bean name="/index" class="com.newlecture.web.controller.IndexController"/>
     
-    <bean name="/notice/list" class="com.newlecture.web.controller.notice.ListController"/>
+    <bean name="/notice/list" class="com.newlecture.web.controller.notice.ListController">
+    	<!-- property의 name은 변수명과 일치시켜준다. -->
+    	<property name="noticeService" ref="noticeService"/>
+    
+    </bean>
     
     <bean name="/notice/detail" class="com.newlecture.web.controller.notice.DetailController"/>
     
@@ -38,6 +42,19 @@
     <!-- /static/ 주소를 /로 매핑시킴 -->
     <!-- mvc:resources는 정적 파일 받아오면 실행하는것임(css의 이미지등) -->
     <mvc:resources location="/static/" mapping="/**"></mvc:resources>
+    
+    
+    <bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<!-- 아래 property의 name들은 고정되어있는 예약어이다. -->
+    	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+    	<property name="url" value="jdbc:oracle:thin:@localhost:1521/xepdb1"/>
+    	<property name="username" value="newlec"/>
+    	<property name="password" value="0000"/>
+    </bean>
     
 
 </beans>
