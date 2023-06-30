@@ -3,6 +3,24 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+  <!-- *을 name에 쓸거면 순서상 맨 밑에 둬야한다. 왜냐하면 *자체가 notice고 뭐고 다 찾아보기 때문이다.-->
+  <!-- but, *을 쓰게되면 무한루프에 빠지는 일이 발생할 수도 있다. 따라서 root.*을 써야한다. Controller의 url도 root.을 붙여줘야한다.-->
+  <definition name="root.*" template="/WEB-INF/view/inc/layout.jsp">
+    <put-attribute name="title" value="공지사항" />
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+  </definition>
+  
+  <definition name="admin.board.*.*" template="/WEB-INF/view/admin/inc/layout.jsp">
+    <put-attribute name="title" value="공지사항" />
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="visual" value="/WEB-INF/view/admin/inc/visual.jsp" />
+    <put-attribute name="aside" value="/WEB-INF/view/admin/inc/aside.jsp" />
+    <put-attribute name="body" value="/WEB-INF/view/admin/board/{1}/{2}.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+  </definition>
+  
   <!-- notice. 으로 시작하는 모든 파일에 타일 적용 {n}는 n번째 와일드카드에 나왔던 문자열을 가리킨다.(*.* 이였다면 두번째 *은 {2})-->
   <definition name="notice.*" template="/WEB-INF/view/customer/inc/layout.jsp">
     <put-attribute name="title" value="공지사항" />
@@ -12,14 +30,4 @@
     <put-attribute name="body" value="/WEB-INF/view/customer/notice/{1}.jsp" />
     <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
   </definition>
-  
-  <!-- *을 name에 쓸거면 순서상 맨 밑에 둬야한다. 왜냐하면 *자체가 notice고 뭐고 다 찾아보기 때문이다.-->
-  <!-- but, *을 쓰게되면 무한루프에 빠지는 일이 발생할 수도 있다. 따라서 root.*을 써야한다. Controller의 url도 root.을 붙여줘야한다.-->
-  <definition name="root.*" template="/WEB-INF/view/inc/layout.jsp">
-    <put-attribute name="title" value="공지사항" />
-    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
-    <put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
-  </definition>
- 
 </tiles-definitions>
